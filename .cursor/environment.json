@@ -5,7 +5,7 @@
     {
       "name": "static-server",
       "command": "python3 -m http.server 8000 --bind 0.0.0.0",
-      "description": "Serves the static site over HTTP at http://localhost:8000. The IZ TECH landing page is at /reference/old-index.html."
+      "description": "Serves the static site over HTTP at http://localhost:8000. The IZ TECH landing page (index.html) renders at the root URL."
     }
   ],
   "ports": [
