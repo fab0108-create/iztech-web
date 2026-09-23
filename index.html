@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IZ TECH — Chatbot de WhatsApp para tu negocio en Perú</title>
+<meta name="description" content="IZ TECH arma un chatbot de WhatsApp que contesta horarios, precios y citas. Para clínicas dentales y negocios pequeños en el Perú. También páginas web sencillas. Precios en soles.">
+<link rel="canonical" href="https://fab0108-create.github.io/iztech-web/">
+<meta name="theme-color" content="#0e684c">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_PE">
+<meta property="og:site_name" content="IZ TECH">
+<meta property="og:title" content="IZ TECH — Chatbot de WhatsApp para tu negocio">
+<meta property="og:description" content="Contesta horarios, precios y citas por WhatsApp. Para clínicas dentales y negocios pequeños en el Perú. Precios publicados en soles.">
+<meta property="og:url" content="https://fab0108-create.github.io/iztech-web/">
+<meta property="og:image" content="https://fab0108-create.github.io/iztech-web/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,680&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "IZ TECH",
+  "url": "https://fab0108-create.github.io/iztech-web/",
+  "email": "fab0108@gmail.com",
+  "telephone": "+51982521128",
+  "areaServed": "PE",
+  "image": "https://fab0108-create.github.io/iztech-web/og.png",
+  "description": "Chatbots de WhatsApp y páginas web sencillas para clínicas dentales y negocios pequeños en el Perú.",
+  "address": { "@type": "PostalAddress", "addressCountry": "PE" },
+  "priceRange": "S/249-S/2790"
+}
+</script>
+<style>
+  :root {
+    --bg: #f3efe6;
+    --card: #fffdf8;
+    --ink: #1a1714;
+    --muted: #4a443c;
+    --line: #e4dcd0;
+    --pine: #0e684c;
+    --pine-deep: #12382c;
+    --pine-soft: #e5f3ec;
+    --wa: #0e684c;
+    --shadow: 0 18px 40px rgba(28, 24, 18, 0.08);
+    --serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --sans: "Outfit", "Segoe UI", sans-serif;
+    --wrap: 1100px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(900px 420px at 100% -10%, rgba(14, 104, 76, 0.08), transparent 60%),
+      radial-gradient(700px 380px at -10% 20%, rgba(138, 90, 42, 0.06), transparent 55%),
+      var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  img, svg { max-width: 100%; }
+  a { color: var(--pine); }
+  :focus-visible { outline: 3px solid var(--pine); outline-offset: 3px; }
+  .skip {
+    position: absolute;
+    left: 12px;
+    top: -48px;
+    background: #fff;
+    color: var(--ink);
+    padding: 8px 12px;
+    border-radius: 8px;
+    z-index: 80;
+  }
+  .skip:focus { top: 12px; }
+  .wrap { width: min(var(--wrap), calc(100% - 32px)); margin: 0 auto; }
+  .kicker {
+    margin: 0 0 10px;
+    color: var(--pine);
+    font-weight: 700;
+    font-size: 14px;
+  }
+  h1, h2 { text-wrap: balance; }
+  h1, h2, h3, .num, .price {
+    font-family: var(--serif);
+    font-weight: 560;
+    letter-spacing: -0.03em;
+  }
+  h1 { font-size: clamp(36px, 8vw, 62px); line-height: 1.05; margin: 0 0 16px; }
+  h2 { font-size: clamp(30px, 5vw, 44px); line-height: 1.12; margin: 0 0 12px; }
+  h3 { font-size: 26px; margin: 0 0 6px; line-height: 1.15; }
+  p { margin: 0 0 12px; }
+  .lead { font-size: 18.5px; color: var(--muted); max-width: 40rem; }
+  .muted { color: var(--muted); }
+
+  header.site {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(243, 239, 230, 0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(28, 23, 20, 0.08);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 68px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .mark {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: var(--pine);
+    color: #f4f0e6;
+    font-family: var(--serif);
+    font-size: 16px;
+  }
+  .logo small {
+    display: block;
+    font-weight: 500;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: none; align-items: center; gap: 22px; }
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15.5px;
+  }
+  .nav-links a:hover { color: var(--pine); }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    border: 1.5px solid transparent;
+    line-height: 1.1;
+  }
+  .btn-wa { background: var(--wa); color: #fff; }
+  .btn-wa:hover { background: var(--pine-deep); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: #cfc6b8; }
+  .btn-ghost:hover { border-color: var(--pine); color: var(--pine); }
+  .btn-light { background: #f4f0e6; color: var(--pine-deep); }
+  .btn-light:hover { background: #fff; }
+  .btn svg { width: 18px; height: 18px; flex: 0 0 auto; }
+  .nav-cta { padding-inline: 16px; }
+  .menu { position: relative; }
+  .menu summary {
+    list-style: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+  .menu summary::-webkit-details-marker { display: none; }
+  .burger, .burger::before, .burger::after {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    position: relative;
+  }
+  .burger::before, .burger::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+  .burger::before { top: -6px; }
+  .burger::after { top: 6px; }
+  .panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    width: min(280px, 78vw);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 8px;
+    display: grid;
+  }
+  .panel a {
+    text-decoration: none;
+    color: var(--ink);
+    padding: 12px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+  .panel a:hover { background: var(--pine-soft); }
+
+  .hero { padding: 36px 0 20px; }
+  .hero-grid { display: grid; gap: 32px; align-items: center; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 14px; }
+  .trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .trust li {
+    background: rgba(255, 253, 248, 0.8);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .phone {
+    width: min(100%, 360px);
+    margin: 0 auto;
+    background: #111;
+    border-radius: 36px;
+    padding: 12px;
+    box-shadow: 0 30px 60px rgba(28, 24, 18, 0.18);
+  }
+  .screen {
+    background: #efe7de;
+    border-radius: 26px;
+    overflow: hidden;
+  }
+  .wa-top {
+    background: #075e54;
+    color: #fff;
+    padding: 14px 14px 12px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .ava {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #128c7e;
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .wa-top strong { display: block; font-size: 15px; }
+  .wa-top span { font-size: 12px; opacity: 0.85; }
+  .chat { padding: 14px 12px 18px; display: grid; gap: 8px; }
+  .bubble {
+    max-width: 86%;
+    padding: 9px 12px;
+    border-radius: 12px;
+    font-size: 14.5px;
+    line-height: 1.35;
+  }
+  .bubble time { display: block; font-size: 11px; opacity: 0.65; text-align: right; margin-top: 4px; }
+  .in { background: #fff; justify-self: start; border-top-left-radius: 4px; }
+  .out { background: #d9fdd3; justify-self: end; border-top-right-radius: 4px; }
+  .caption { text-align: center; color: var(--muted); font-size: 14px; margin: 12px 0 0; }
+
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 28px 0 10px;
+    padding: 0;
+    list-style: none;
+  }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 16px 14px 14px;
+  }
+  .num {
+    font-size: 34px;
+    margin: 0;
+    color: var(--pine-deep);
+    line-height: 1;
+  }
+  .stat p:last-child { margin: 8px 0 0; font-size: 14.5px; color: var(--muted); }
+
+  section { padding: 64px 0; }
+  .sec-head { max-width: 40rem; margin-bottom: 26px; }
+  .compare { display: grid; gap: 14px; }
+  .sheet {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 22px 20px;
+  }
+  .sheet.good { background: var(--pine-soft); border-color: #c9e6d8; }
+  .sheet h3 { font-family: var(--sans); font-weight: 700; font-size: 18px; letter-spacing: 0; }
+  .sheet ul, .plan ul, .steps { margin: 0; padding: 0; list-style: none; }
+  .sheet li, .plan li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin: 0 0 10px;
+  }
+  .sheet li:last-child, .plan li:last-child { margin-bottom: 0; }
+  .tick {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #fff;
+    color: var(--pine);
+    margin-top: 1px;
+  }
+  .sheet.good .tick { background: var(--pine); color: #fff; }
+
+  .cards { display: grid; gap: 14px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 22px 20px;
+  }
+  .card .ico {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: var(--pine-soft);
+    color: var(--pine);
+    margin-bottom: 14px;
+  }
+  .card h3 { font-family: var(--sans); font-weight: 700; font-size: 20px; letter-spacing: 0; }
+  .card p { color: var(--muted); }
+  .card p:last-child { margin: 0; }
+  .card .price { color: var(--pine-deep); }
+  .card { display: flex; flex-direction: column; align-items: flex-start; }
+  .card .btn { margin-top: auto; }
+  .per { font-family: var(--sans); font-size: 16px; letter-spacing: 0; font-weight: 600; }
+
+  .demo {
+    background: var(--pine-deep);
+    color: #f6f3ec;
+    border-radius: 28px;
+    padding: 28px 22px;
+  }
+  .demo .kicker { color: #b7e0cf; }
+  .demo p { color: #e4f0ea; max-width: 38rem; }
+  .demo .btn { margin-top: 8px; }
+
+  .plans { display: grid; gap: 14px; }
+  .plan {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 22px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .plan .who { margin: 0; color: var(--muted); }
+  .prices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 12px 0;
+  }
+  .prices div {
+    background: #f7f3eb;
+    border-radius: 16px;
+    padding: 12px;
+  }
+  .prices span { display: block; font-size: 13px; color: var(--muted); }
+  .price { font-size: clamp(22px, 5.2vw, 32px); margin: 2px 0 0; line-height: 1.05; color: var(--pine-deep); }
+  .plan ul { margin-top: 4px; }
+  .plan .btn { margin-top: auto; width: 100%; }
+  .plan .more {
+    display: inline-block;
+    margin-top: 4px;
+    font-weight: 650;
+  }
+  .badge {
+    align-self: flex-start;
+    background: #e7f6ee;
+    color: var(--pine-deep);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 5px 10px;
+  }
+  .plan.featured {
+    background: var(--pine-deep);
+    color: #f6f3ec;
+    border-color: var(--pine-deep);
+  }
+  .plan.featured .who,
+  .plan.featured .prices span,
+  .plan.featured li { color: #d7ebe3; }
+  .plan.featured .prices div { background: rgba(255, 255, 255, 0.08); }
+  .plan.featured .price { color: #fff; }
+  .plan.featured .tick { background: #1d6b52; color: #fff; }
+  .plan.featured .badge { background: #f4f0e6; color: var(--pine-deep); }
+  .plan.featured .more { color: #f4f0e6; }
+
+  .extra-label { margin: 28px 0 12px; font-weight: 700; }
+  .note { margin-top: 16px; color: var(--muted); font-size: 15.5px; }
+
+  .steps { display: grid; gap: 12px; }
+  .step {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 18px 18px 16px;
+  }
+  .step b {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    background: var(--pine-soft);
+    color: var(--pine-deep);
+    font-family: var(--serif);
+    margin-bottom: 10px;
+  }
+  .step h3 { font-family: var(--sans); font-size: 18px; font-weight: 700; letter-spacing: 0; }
+  .step p { margin: 0; color: var(--muted); }
+
+  .pay {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: 26px 20px;
+    box-shadow: var(--shadow);
+  }
+  .halves { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 18px 0; }
+  .half {
+    border-radius: 18px;
+    padding: 16px;
+    background: var(--pine-soft);
+  }
+  .half strong {
+    display: block;
+    font-family: var(--serif);
+    font-size: 36px;
+    line-height: 1;
+    font-weight: 560;
+  }
+  .methods { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 14px; }
+  .pay-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border-radius: 999px;
+    padding: 8px 12px 8px 8px;
+    font-weight: 700;
+    border: 1px solid var(--line);
+  }
+  .dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 13px;
+  }
+  .yape { background: #742284; }
+  .plin { background: #00a79d; }
+  .bank { background: var(--pine); }
+  .big-num { font-family: var(--serif); font-size: clamp(28px, 6vw, 40px); margin: 0; }
+  .big-num a { color: inherit; text-decoration: none; }
+
+  .faq details {
+    border-bottom: 1px solid var(--line);
+    padding: 14px 0;
+  }
+  .faq summary {
+    cursor: pointer;
+    font-weight: 700;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; font-family: var(--serif); font-size: 28px; color: var(--pine); line-height: 1; }
+  .faq details[open] summary::after { content: "–"; }
+  .faq details p { margin: 10px 0 4px; color: var(--muted); }
+
+  .final {
+    text-align: center;
+    padding-bottom: 28px;
+  }
+  .final .lead { margin-inline: auto; }
+  .final .actions { justify-content: center; }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 28px 0 36px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+  .foot {
+    display: grid;
+    gap: 14px;
+  }
+  .foot a { color: var(--pine-deep); font-weight: 650; }
+  .fine { font-size: 14px; }
+
+  .dock {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 45;
+    background: rgba(243, 239, 230, 0.96);
+    border-top: 1px solid var(--line);
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  }
+  .dock .btn { width: 100%; }
+  .float-wa { display: none; }
+
+  @media (min-width: 800px) {
+    .menu { display: none; }
+    .nav-links { display: flex; }
+    .hero { padding: 64px 0 24px; }
+    .hero-grid { grid-template-columns: 1.05fr 0.95fr; gap: 48px; }
+    .stats { grid-template-columns: repeat(4, 1fr); }
+    .compare, .cards, .steps { grid-template-columns: 1fr 1fr; }
+    .cards.four { grid-template-columns: 1fr 1fr; }
+    .plans { grid-template-columns: 1fr 1fr; }
+    .plan-clinica { order: 1; }
+    .plan-starter { order: 2; }
+    .plan-multi { order: 3; }
+    .dock { display: none; }
+    body { padding-bottom: 0; }
+    .float-wa {
+      display: inline-flex;
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 45;
+      box-shadow: 0 12px 30px rgba(14, 104, 76, 0.28);
+    }
+    .foot { grid-template-columns: 1.4fr 1fr; align-items: end; }
+  }
+  @media (max-width: 799px) {
+    body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
+    .nav-cta { display: none; }
+  }
+  @media (min-width: 1040px) {
+    .cards.four { grid-template-columns: repeat(4, 1fr); }
+    .plans { grid-template-columns: repeat(3, 1fr); }
+    .plan-starter { order: 1; }
+    .plan-clinica { order: 2; }
+    .plan-multi { order: 3; }
+    .steps { grid-template-columns: repeat(4, 1fr); }
+    .extras { grid-template-columns: 1fr 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+</head>
+<body id="inicio">
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="#inicio">
+      <span class="mark" aria-hidden="true">IZ</span>
+      <span>IZ TECH<small>Perú</small></span>
+    </a>
+    <nav class="nav-links" aria-label="Secciones">
+      <a href="#que-hace">Qué hace</a>
+      <a href="#demo">Demo</a>
+      <a href="#precios">Precios</a>
+      <a href="#pagos">Pagos</a>
+      <a class="btn btn-wa nav-cta" href="https://wa.me/51982521128?text=Hola%20IZ%20TECH%2C%20quiero%20que%20mi%20WhatsApp%20conteste%20a%20mis%20clientes." target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+    <details class="menu">
+      <summary aria-label="Abrir menú"><span class="burger"></span></summary>
+      <div class="panel">
+        <a href="#que-hace">Qué hace</a>
+        <a href="#demo">Demo</a>
+        <a href="#precios">Precios</a>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#pagos">Pagos</a>
+        <a href="#preguntas">Preguntas</a>
+      </div>
+    </details>
+  </div>
+</header>
+
+<main id="contenido">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="kicker">Chatbot de WhatsApp para negocios en el Perú</p>
+        <h1>Tu WhatsApp contesta, aunque estés ocupado</h1>
+        <p class="lead">Armamos un chatbot que responde por tu negocio: horarios, precios, dirección y citas. Habla claro, sin palabras raras. Pensado primero para clínicas dentales, y también para otros negocios pequeños. Si lo pides, sumamos una página web sencilla.</p>
+        <div class="actions">
+          <a class="btn btn-wa" href="https://wa.me/51982521128?text=Hola%20IZ%20TECH%2C%20quiero%20que%20mi%20WhatsApp%20conteste%20a%20mis%20clientes." target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            Quiero mi chatbot
+          </a>
+          <a class="btn btn-ghost" href="#precios">Ver precios</a>
+        </div>
+        <ul class="trust">
+          <li>Precio publicado en soles</li>
+          <li>Yape, Plin o transferencia</li>
+          <li>50% para empezar</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="phone" aria-hidden="true">
+          <div class="screen">
+            <div class="wa-top">
+              <div class="ava">CS</div>
+              <div>
+                <strong>Clínica demo</strong>
+                <span>en línea</span>
+              </div>
+            </div>
+            <div class="chat">
+              <div class="bubble in">Hola, ¿atienden los sábados?<time>10:41</time></div>
+              <div class="bubble out">Sí, de 9 a. m. a 2 p. m. ¿Te reservo un horario?<time>10:41</time></div>
+              <div class="bubble in">El sábado a las 10, por favor.<time>10:42</time></div>
+              <div class="bubble out">Listo. Te dejo el sábado a las 10. ¿Tu nombre?<time>10:42</time></div>
+            </div>
+          </div>
+        </div>
+        <p class="caption">Ejemplo de cómo hablaría el chatbot en una clínica. IZ TECH no es una clínica dental.</p>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <ul class="stats" aria-label="Datos del servicio">
+        <li class="stat">
+          <p class="num" data-target="24" data-suffix="/7">24/7</p>
+          <p>Contesta de día y de noche</p>
+        </li>
+        <li class="stat">
+          <p class="num" data-target="5">5</p>
+          <p>Planes con precio publicado</p>
+        </li>
+        <li class="stat">
+          <p class="num" data-target="50" data-suffix="%">50%</p>
+          <p>Para empezar. El resto al entregar</p>
+        </li>
+        <li class="stat">
+          <p class="num" data-prefix="S/" data-target="249">S/249</p>
+          <p>Al mes, en el plan más simple</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="que-hace">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">El problema</p>
+        <h2>Cuando estás atendiendo, el chat no puede esperar</h2>
+        <p class="lead">Un mensaje sin respuesta se queda en visto. Esa persona llama a otro lado. El chatbot contesta en el momento, con lo que tú le enseñaste de tu negocio.</p>
+      </div>
+      <div class="compare">
+        <article class="sheet">
+          <h3>Sin chatbot</h3>
+          <ul>
+            <li><span class="tick" aria-hidden="true">–</span><span>Respondes recién cuando sales de la cita o cierras el local.</span></li>
+            <li><span class="tick" aria-hidden="true">–</span><span>Te preguntan el precio y, si tardas, se van con otro.</span></li>
+            <li><span class="tick" aria-hidden="true">–</span><span>De noche y los feriados el WhatsApp queda mudo.</span></li>
+          </ul>
+        </article>
+        <article class="sheet good">
+          <h3>Con el chatbot de IZ TECH</h3>
+          <ul>
+            <li><span class="tick" aria-hidden="true">✓</span><span>Dice el horario, la dirección y los precios al toque.</span></li>
+            <li><span class="tick" aria-hidden="true">✓</span><span>Ayuda a dejar la cita encaminada y te avisa.</span></li>
+            <li><span class="tick" aria-hidden="true">✓</span><span>Sigue respondiendo cuando tú no puedes mirar el teléfono.</span></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Qué hace</p>
+        <h2>Un asistente en el WhatsApp que ya usas</h2>
+        <p class="lead">No tienes que aprender un programa nuevo. Tus clientes te escriben como siempre. El chatbot contesta con tus datos.</p>
+      </div>
+      <div class="cards four">
+        <article class="card">
+          <div class="ico" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 01-9 8.4 8.5 8.5 0 01-3.8-.9L3 20.5l1.6-4.5A8.4 8.4 0 1112 4a8.4 8.4 0 019 7.5z"/></svg>
+          </div>
+          <h3>Contesta lo de siempre</h3>
+          <p>Horario, dirección, servicios y precios. Las preguntas que se repiten todos los días.</p>
+        </article>
+        <article class="card">
+          <div class="ico" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+          </div>
+          <h3>Encamina la cita</h3>
+          <p>En una clínica, puede apartar un horario y pedir el nombre. Tú confirmas cuando puedas.</p>
+        </article>
+        <article class="card">
+          <div class="ico" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h3>Pasa a una persona</h3>
+          <p>Si la pregunta se sale de lo acordado, te deja el caso para que sigas tú la conversación.</p>
+        </article>
+        <article class="card">
+          <div class="ico" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v6l4 2"/></svg>
+          </div>
+          <h3>No se toma descanso</h3>
+          <p>Responde de día, de noche y en feriados. Tú miras el resumen cuando te acomoda.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="demo">
+    <div class="wrap">
+      <div class="demo">
+        <p class="kicker">Demo de clínica dental</p>
+        <h2>Míralo como lo vería un paciente</h2>
+        <p>Publicamos una página de ejemplo, Clínica Sonrisa, para que veas el chatbot en acción: servicios, precios de muestra y una cita por chat. IZ TECH no atiende pacientes. Armamos la herramienta para quien tiene la clínica.</p>
+        <a class="btn btn-light" href="https://fab0108-create.github.io/iztech-sonrisa-demo/" target="_blank" rel="noopener">Abrir la demo</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="precios">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Precios</p>
+        <h2>Lo que cuesta, escrito claro</h2>
+        <p class="lead">El chatbot es el servicio principal. La página web y los avisos van aparte, si los necesitas. Montos en soles, sin “desde”.</p>
+      </div>
+
+      <div class="plans">
+        <article class="plan plan-clinica featured">
+          <span class="badge">Para clínicas</span>
+          <h3>Clínica</h3>
+          <p class="who">Una clínica dental, un local.</p>
+          <div class="prices">
+            <div><span>Para armarlo</span><p class="price">S/1790</p></div>
+            <div><span>Cada mes</span><p class="price">S/349</p></div>
+          </div>
+          <ul>
+            <li><span class="tick" aria-hidden="true">✓</span><span>Hecho para una clínica dental</span></li>
+            <li><span class="tick" aria-hidden="true">✓</span><span>Informa servicios, precios y horarios</span></li>
+            <li><span class="tick" aria-hidden="true">✓</span><span>Ayuda a dejar las citas encaminadas</span></li>
+            <li><span class="tick" aria-hidden="true">✓</span><span>El mismo estilo que puedes ver en la demo</span></li>
+          </ul>
+          <a class="more" href="https://fab0108-create.github.io/iztech-sonrisa-demo/" target="_blank" rel="noopener">Ver demo de clínica</a>
+          <a class="btn btn-light" href="https://wa.me/51982521128?text=Hola%20IZ%20TECH%2C%20me%20interesa%20el%20plan%20Cl%C3%ADnica." target="_blank" rel="noopener">Pedir plan Clínica</a>
+        </article>
+
+        <article class="plan plan-starter">
+          <h3>Starter</h3>
+          <p class="who">Un negocio pequeño, un solo local.</p>
+          <div class="prices">
+            <div><span>Para armarlo</span><p class="price">S/1190</p></div>
+            <div><span>Cada mes</span><p class="price">S/249</p></div>
+          </div>
+          <ul>
+            <li><span class="tick" aria-hidden="true">✓</span><span>Un número de WhatsApp</span></li>
+            <li><span class="tick" aria-hidden="true">✓</span><span>Responde lo que más te preguntan</span></li>
+            <li><span class="tick" aria-hidden="true">✓</span><span>Te avisa cuando debes seguir tú</span></li>
+            <li><span class="tick" aria-hidden="true">✓</span><span>Para un solo local</span></li>
+          </ul>
+          <a class="btn btn-wa" href="https://wa.me/51982521128?text=Hola%20IZ%20TECH%2C%20me%20interesa%20el%20plan%20Starter." target="_blank" rel="noopener">Pedir plan Starter</a>
+        </article>
+
+        <article class="plan plan-multi">
+          <h3>Multi</h3>
+          <p class="who">Más de una sede o más de una línea.</p>
+          <div class="prices">
+            <div><span>Para armarlo</span><p class="price">S/2790</p></div>
+            <div><span>Cada mes</span><p class="price">S/549</p></div>
+          </div>
+          <ul>
+            <li><span class="tick" aria-hidden="true">✓</span><span>Varios locales o varias líneas</span></li>
+            <li><span class="tick" aria-hidden="true">✓</span><span>La misma forma de atender en cada sede</span></li>
+            <li><span class="tick" aria-hidden="true">✓</span><span>Para una clínica que ya creció</span></li>
+            <li><span class="tick" aria-hidden="true">✓</span><span>Un solo equipo te acompaña</span></li>
+          </ul>
+          <a class="btn btn-wa" href="https://wa.me/51982521128?text=Hola%20IZ%20TECH%2C%20me%20interesa%20el%20plan%20Multi." target="_blank" rel="noopener">Pedir plan Multi</a>
+        </article>
+      </div>
+
+      <p class="extra-label">Si también lo necesitas</p>
+      <div class="cards extras">
+        <article class="card">
+          <h3>Página web</h3>
+          <p class="price">S/990</p>
+          <p>Un solo pago. Una página clara para presentarte, que se ve bien en el celular, con botón de WhatsApp. Acompaña al chatbot: no lo reemplaza.</p>
+          <a class="btn btn-ghost" href="https://wa.me/51982521128?text=Hola%20IZ%20TECH%2C%20me%20interesa%20la%20p%C3%A1gina%20web." target="_blank" rel="noopener">Pedir la página</a>
+        </article>
+        <article class="card">
+          <h3>Avisos</h3>
+          <p class="price">S/690 <span class="per">al mes</span></p>
+          <p>Te ayudamos a publicar avisos para que te escriban. Esos S/690 son nuestro trabajo. Lo que gastes en Facebook o Instagram lo pagas tú, aparte.</p>
+          <a class="btn btn-ghost" href="https://wa.me/51982521128?text=Hola%20IZ%20TECH%2C%20me%20interesa%20el%20plan%20de%20avisos." target="_blank" rel="noopener">Pedir avisos</a>
+        </article>
+      </div>
+      <p class="note">La instalación del chatbot y la página se pagan mitad al empezar y mitad al entregar. Las mensualidades van cada mes.</p>
+    </div>
+  </section>
+
+  <section id="como-funciona">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Cómo funciona</p>
+        <h2>Cuatro pasos, en simple</h2>
+      </div>
+      <ol class="steps">
+        <li class="step"><b>1</b><h3>Nos escribes</h3><p>Por WhatsApp nos cuentas qué negocio tienes y cómo atiendes hoy.</p></li>
+        <li class="step"><b>2</b><h3>Lo armamos</h3><p>Ponemos tus horarios, precios y la forma en que quieres que hable.</p></li>
+        <li class="step"><b>3</b><h3>Pagas la mitad</h3><p>Por Yape, Plin o transferencia, para empezar el trabajo.</p></li>
+        <li class="step"><b>4</b><h3>Lo recibes</h3><p>Lo pruebas. Si está bien, pagas la otra mitad y queda andando.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="pagos">
+    <div class="wrap">
+      <div class="pay">
+        <p class="kicker">Pagos</p>
+        <h2>Aceptamos Yape, Plin y transferencia</h2>
+        <p class="lead">Pagas 50% para empezar y 50% cuando te lo entregamos. El número es el mismo del WhatsApp.</p>
+        <div class="halves">
+          <div class="half"><strong>50%</strong> al empezar</div>
+          <div class="half"><strong>50%</strong> al entregar</div>
+        </div>
+        <div class="methods" aria-label="Medios de pago">
+          <span class="pay-chip"><span class="dot yape">Y</span>Yape</span>
+          <span class="pay-chip"><span class="dot plin">P</span>Plin</span>
+          <span class="pay-chip"><span class="dot bank">T</span>Transferencia</span>
+        </div>
+        <p class="big-num"><a href="https://wa.me/51982521128?text=Hola%20IZ%20TECH%2C%20quiero%20que%20mi%20WhatsApp%20conteste%20a%20mis%20clientes." target="_blank" rel="noopener">+51 982 521 128</a></p>
+        <p class="muted">También puedes escribir a <a href="mailto:fab0108@gmail.com">fab0108@gmail.com</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="preguntas">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Preguntas</p>
+        <h2>Antes de escribirnos</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>¿IZ TECH es una clínica dental?</summary>
+          <p>No. Armamos el chatbot de WhatsApp y, si lo pides, la página del negocio. La demo Sonrisa es solo un ejemplo para que veas cómo se ve.</p>
+        </details>
+        <details>
+          <summary>¿Tengo que saber de tecnología?</summary>
+          <p>No. Hablamos en simple y te lo dejamos listo. Tus clientes siguen escribiendo al mismo WhatsApp.</p>
+        </details>
+        <details>
+          <summary>¿Puedo pagar con Yape?</summary>
+          <p>Sí. También con Plin o transferencia. Es 50% para empezar y 50% al entregar. El número es +51 982 521 128.</p>
+        </details>
+        <details>
+          <summary>¿Los S/690 de avisos incluyen lo de Facebook?</summary>
+          <p>No. S/690 al mes es nuestro trabajo. El gasto del anuncio lo pones tú, aparte.</p>
+        </details>
+        <details>
+          <summary>¿Puedo ver un ejemplo antes de decidir?</summary>
+          <p>Sí. La <a href="https://fab0108-create.github.io/iztech-sonrisa-demo/" target="_blank" rel="noopener">demo de una clínica</a> está publicada. Si prefieres, escríbenos y lo vemos con tu caso.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Cuéntanos de tu local</h2>
+      <p class="lead">Escríbenos por WhatsApp. Dinos qué negocio tienes y te decimos qué plan encaja. Te responde una persona, sin compromiso.</p>
+      <div class="actions">
+        <a class="btn btn-wa" href="https://wa.me/51982521128?text=Hola%20IZ%20TECH%2C%20quiero%20que%20mi%20WhatsApp%20conteste%20a%20mis%20clientes." target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          Hablar por WhatsApp
+        </a>
+      </div>
+      <p class="muted">+51 982 521 128 · fab0108@gmail.com</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <a class="logo" href="#inicio">
+        <span class="mark" aria-hidden="true">IZ</span>
+        <span>IZ TECH<small>Chatbot de WhatsApp y páginas web</small></span>
+      </a>
+      <p class="fine">IZ TECH no es una clínica dental. Hacemos el chatbot y la página para el negocio.</p>
+    </div>
+    <div>
+      <p><a href="https://wa.me/51982521128?text=Hola%20IZ%20TECH%2C%20quiero%20que%20mi%20WhatsApp%20conteste%20a%20mis%20clientes." target="_blank" rel="noopener">WhatsApp +51 982 521 128</a></p>
+      <p><a href="mailto:fab0108@gmail.com">fab0108@gmail.com</a></p>
+      <p><a href="https://fab0108-create.github.io/iztech-sonrisa-demo/" target="_blank" rel="noopener">Demo de clínica</a></p>
+      <p class="fine">© <span id="year">2026</span> IZ TECH · Perú</p>
+    </div>
+  </div>
+</footer>
+
+<div class="dock">
+  <a class="btn btn-wa" href="https://wa.me/51982521128?text=Hola%20IZ%20TECH%2C%20quiero%20que%20mi%20WhatsApp%20conteste%20a%20mis%20clientes." target="_blank" rel="noopener">Escribir por WhatsApp</a>
+</div>
+<a class="float-wa btn btn-wa" href="https://wa.me/51982521128?text=Hola%20IZ%20TECH%2C%20quiero%20que%20mi%20WhatsApp%20conteste%20a%20mis%20clientes." target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+  WhatsApp
+</a>
+
+<script>
+(function () {
+  var year = document.getElementById("year");
+  if (year) year.textContent = String(new Date().getFullYear());
+
+  document.querySelectorAll(".menu .panel a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      var menu = link.closest("details");
+      if (menu) menu.open = false;
+    });
+  });
+
+  // Cifras reales desde el primer pintado. Nunca se escribe 0.
+  var nodes = document.querySelectorAll(".num[data-target]");
+
+  function paint(el, value) {
+    var target = parseInt(el.getAttribute("data-target"), 10);
+    var shown = parseInt(value, 10);
+    if (!shown || shown < 1) shown = target > 0 ? target : 1;
+    var prefix = el.getAttribute("data-prefix") || "";
+    var suffix = el.getAttribute("data-suffix") || "";
+    el.textContent = prefix + String(shown) + suffix;
+  }
+
+  nodes.forEach(function (el) {
+    paint(el, el.getAttribute("data-target"));
+  });
+
+  // No contamos desde cero: el HTML ya trae la cifra real. Si el
+  // observador falla, un temporizador vuelve a escribir el valor final.
+  function showFinals() {
+    nodes.forEach(function (el) { paint(el, el.getAttribute("data-target")); });
+  }
+  showFinals();
+  window.addEventListener("load", showFinals);
+  window.setTimeout(showFinals, 600);
+})();
+</script>
+</body>
+</html>
